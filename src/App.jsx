@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/HomePage.jsx';
 import About from './pages/AboutPage.jsx';
 import Destinations from './pages/Destinations.jsx';
-import DestinationDetails from './pages/DestinationDetails.jsx';
+
 import NotFound from './pages/NotFound.jsx';
 import Sidebar from './components/Sidebar.jsx';
 
@@ -29,7 +29,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/destinations" element={<Destinations />} />
-              <Route path="/destinations/:id" element={<DestinationDetails />} />
+             
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

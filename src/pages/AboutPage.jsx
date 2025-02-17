@@ -9,7 +9,7 @@ const About = () => {
       </div>
 
       <h2 className="text-3xl font-bold text-blue-600 mb-4 text-center">
-        About Explore Travel
+        About Us
       </h2>
       <p className="text-gray-700 leading-relaxed">
         Explore Travel offers a wide range of trips across Europe, covering destinations from Italy and the Mediterranean to Scandinavia, Central Europe, Paris, the Netherlands, and even Russia. Beyond Europe, our tours extend to Turkey, the Middle East—including Jordan, Egypt, and Israel—as well as further destinations such as China, Japan, Vietnam, India, Canada, and the United States.

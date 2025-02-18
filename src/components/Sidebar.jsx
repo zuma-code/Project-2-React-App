@@ -6,17 +6,17 @@ const Sidebar = () => {
     
       <ul className="space-y-12">
         <li>
-          <Link to="/destinations" className="block text-xl hover:text-blue-300 transition">
+          <Link to="/destinations" className="block text-xl hover:text-blue-200 transition">
             🌍 Destinations
           </Link>
         </li>
         <li>
-          <Link to="/best-reviews" className="block text-xl hover:text-blue-400 transition">
+          <Link to="/best-reviews" className="block text-xl hover:text-blue-200 transition">
             ⭐ Best Reviews
           </Link>
         </li>
         <li>
-          <Link to="/greatdeals" className="block text-xl hover:text-blue-400 transition">
+          <Link to="/greatdeals" className="block text-xl hover:text-blue-200 transition">
             🔥 Great Deals
           </Link>
         </li>

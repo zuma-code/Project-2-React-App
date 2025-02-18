@@ -56,7 +56,7 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/a/create"
+                  to="../addDestination"
                   className="block px-4 py-2 hover:bg-blue-200"
                   onClick={() => setIsDropdownOpen(false)}
                 >

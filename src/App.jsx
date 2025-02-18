@@ -10,7 +10,7 @@ import BestReviews from "./pages/BestReviewsPage.jsx";
 import NotFound from './pages/NotFound.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import DeleteDestination from "./pages/AdminPage/DeleteDestinationPage.jsx";
-
+import AddDestinationPage from "./pages/AdminPage/AddDestinationPage.jsx";
 
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
               <Route path="/destinations/:id" element={<DestinationDetails />} />
               <Route path="/bestReviews" element={<BestReviews />} />
               <Route path="/deleteDestination" element={<DeleteDestination />} />
+              <Route path="/addDestination" element={<AddDestinationPage />} />
               
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <aside className="bg-green-600 text-white w-64 min-h-screen p-6">
-      <h1 className="text-3xl font-bold mb-4">Explore Travel</h1>
-      <ul className="space-y-8">
+    <aside className="bg-green-600 text-white w-64 min-h-screen p-12">
+    
+      <ul className="space-y-12">
         <li>
           <Link to="/destinations" className="block text-xl hover:text-blue-300 transition">
             🌍 Destinations
@@ -20,11 +20,8 @@ const Sidebar = () => {
             🔥 Great Deals
           </Link>
         </li>
-        <li>
-          <Link to="/adminPage" className="block text-xl hover:text-red-400 transition font-bold">
-            ⚙️ Admin
-          </Link>
-        </li>
+        
+       
       </ul>
     </aside>
   );

@@ -11,8 +11,8 @@ import NotFound from './pages/NotFound.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import DeleteDestination from "./pages/AdminPage/DeleteDestinationPage.jsx";
 import AddDestinationPage from "./pages/AdminPage/AddDestinationPage.jsx";
-
-
+import GreatDealsPage from "./pages/GreatDealsPage.jsx";
+import PlanTripPage from "./pages/PlanTripPage.jsx";
 function App() {
   return (
     <Router>
@@ -35,8 +35,10 @@ function App() {
               <Route path="/bestReviews" element={<BestReviews />} />
               <Route path="/deleteDestination" element={<DeleteDestination />} />
               <Route path="/addDestination" element={<AddDestinationPage />} />
-              
+              <Route path="/greatDeals" element={<GreatDealsPage />} />
+              <Route path="/planTrip" element={<PlanTripPage />} />
               <Route path="*" element={<NotFound />} />
+
             </Routes>
           </main>
         </div>

@@ -26,7 +26,7 @@ const AddDestinationPage = ({ onDestinationAdded }) => {
       ...prev,
       [name]: value,
     }));
-    setError(""); // Clear error when user types
+    setError(""); 
     setSuccess("");
   };
 
@@ -36,7 +36,6 @@ const AddDestinationPage = ({ onDestinationAdded }) => {
     setError("");
     setSuccess("");
 
-    // Validate the image URL
     if (!isValidUrl(destination.image)) {
       setError("Please enter a valid image URL.");
       setLoading(false);
@@ -97,78 +96,89 @@ const AddDestinationPage = ({ onDestinationAdded }) => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold text-center mb-6">Add New Destination</h2>
-      {error && <p className="text-red-600 text-center font-semibold">{error}</p>}
-      {success && <p className="text-green-600 text-center font-semibold">{success}</p>}
+    <div className="max-w-3xl mx-auto mt-10 p-8 bg-white rounded-lg shadow-md">
+      <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Add New Destination</h2>
+
+      {error && (
+        <p className="text-red-600 text-center font-semibold bg-red-100 border border-red-300 rounded-lg p-3 mb-4">
+          {error}
+        </p>
+      )}
+      {success && (
+        <p className="text-green-600 text-center font-semibold bg-green-100 border border-green-300 rounded-lg p-3 mb-4">
+          {success}
+        </p>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="name" className="block font-medium">Destination Name</label>
+          <label htmlFor="name" className="block font-medium text-lg">Destination Name</label>
           <input
             id="name"
             type="text"
             name="name"
-            placeholder="Destination Name"
+            placeholder="Enter destination name"
             value={destination.name}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 text-lg"
             required
           />
         </div>
         <div>
-          <label htmlFor="description" className="block font-medium">Description</label>
+          <label htmlFor="description" className="block font-medium text-lg">Description</label>
           <textarea
             id="description"
             name="description"
-            placeholder="Description"
+            placeholder="Enter description"
             value={destination.description}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 text-lg"
             required
           />
         </div>
         <div>
-          <label htmlFor="image" className="block font-medium">Image URL</label>
+          <label htmlFor="image" className="block font-medium text-lg">Image URL</label>
           <input
             id="image"
             type="url"
             name="image"
-            placeholder="Image URL"
+            placeholder="Enter image URL"
             value={destination.image}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 text-lg"
             required
           />
         </div>
         <div>
-          <label htmlFor="bestTimeToVisit" className="block font-medium">Best Time to Visit</label>
+          <label htmlFor="bestTimeToVisit" className="block font-medium text-lg">Best Time to Visit</label>
           <input
             id="bestTimeToVisit"
             type="text"
             name="bestTimeToVisit"
-            placeholder="Best Time to Visit"
+            placeholder="Enter best time to visit"
             value={destination.bestTimeToVisit}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 text-lg"
           />
         </div>
         <div>
-          <label htmlFor="popularAttractions" className="block font-medium">Popular Attractions</label>
+          <label htmlFor="popularAttractions" className="block font-medium text-lg">Popular Attractions</label>
           <input
             id="popularAttractions"
             type="text"
             name="popularAttractions"
-            placeholder="Popular Attractions (comma-separated)"
+            placeholder="Enter popular attractions (comma-separated)"
             value={destination.popularAttractions}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 text-lg"
           />
         </div>
+
         <div className="flex justify-between">
           <button
             type="submit"
             disabled={loading}
-            className="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600 focus:outline-none disabled:opacity-50"
+            className="bg-green-500 text-white text-lg px-6 py-3 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 disabled:opacity-50"
           >
             {loading ? "Adding..." : "Add Destination"}
           </button>
@@ -176,7 +186,7 @@ const AddDestinationPage = ({ onDestinationAdded }) => {
             type="button"
             onClick={handleReset}
             disabled={loading}
-            className="bg-yellow-500 text-white px-6 py-3 rounded-md hover:bg-yellow-600 focus:outline-none disabled:opacity-50"
+            className="bg-yellow-500 text-white text-lg px-6 py-3 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300 disabled:opacity-50"
           >
             Reset
           </button>
@@ -191,3 +201,4 @@ AddDestinationPage.propTypes = {
 };
 
 export default AddDestinationPage;
+

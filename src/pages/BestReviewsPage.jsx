@@ -30,9 +30,13 @@ function BestReviews() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h2 className="text-3xl font-bold text-center text-blue-800 mb-8">
-        Best Reviews
-      </h2>
+     <h2 className="text-4xl font-extrabold text-center text-blue-900 mb-6 leading-snug tracking-wide">
+  🌟 Best Reviewed Destinations 🌟  
+     </h2>
+      <p className="text-lg text-gray-700 text-center max-w-2xl mx-auto mb-8">
+  Looking for the most breathtaking travel experiences?  
+  Our top-rated destinations have been highly praised by travelers like you!  
+    </p>
 
       {/* Loading State */}
       {loading && <p className="text-center text-gray-500">Loading best-rated destinations...</p>}

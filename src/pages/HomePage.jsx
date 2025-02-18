@@ -16,7 +16,7 @@ const Home = () => {
   
         {/* Featured Destinations */}
         <section className="p-10">
-          <h2 className="text-3xl font-bold text-center">Popular Destinations</h2>
+          <h2 className="text-3xl font-bold text-center text-blue-800 mb-8">Popular Destinations</h2>
           <div className="grid grid-cols-3 gap-6 mt-6  ">
             <div className="p-4 shadow-lg rounded-lg ">
               <img src="/images/paris.jpg" alt="Paris" className="rounded-lg" />

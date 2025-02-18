@@ -20,6 +20,11 @@ const Sidebar = () => {
             🔥 Great Deals
           </Link>
         </li>
+        <li>
+          <Link to="/adminPage" className="block text-xl hover:text-red-400 transition font-bold">
+            ⚙️ Admin
+          </Link>
+        </li>
       </ul>
     </aside>
   );

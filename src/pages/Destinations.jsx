@@ -1,73 +1,118 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const Destinations = () => {
-  const [places, setPlaces] = useState([]);
-  const [search, setSearch] = useState("");
-  const [filteredPlaces, setFilteredPlaces] = useState([]);
+const API_URL = "http://localhost:5005";
 
+function Destinations() {
+  const [destinations, setDestinations] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [favorites, setFavorites] = useState({}); // Store ratings (1 to 3 hearts)
+
+  // Fetch destinations from API
   useEffect(() => {
-    // Simulating an API call
-    setTimeout(() => {
-      const destinationList = [
-        { id: 1, name: "Paris", description: "City of Light" },
-        { id: 2, name: "Tokyo", description: "Land of the Rising Sun" },
-        { id: 3, name: "New York", description: "The Big Apple" },
-      ];
-      setPlaces(destinationList);
-      setFilteredPlaces(destinationList);
-    }, 2000);
+    axios
+      .get(`${API_URL}/destinations`)
+      .then((response) => {
+        setDestinations(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError("Failed to load destinations. Please try again later.");
+        setLoading(false);
+      });
   }, []);
 
+  // Load ratings from local storage on mount
   useEffect(() => {
-    // Filter destinations when search input changes
-    setFilteredPlaces(
-      places.filter((place) =>
-        place.name.toLowerCase().includes(search.toLowerCase())
-      )
-    );
-  }, [search, places]);
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
+    setFavorites(storedFavorites);
+  }, []);
+
+  // Handle heart rating (1 to 3 hearts)
+  const setHeartRating = async (destinationId, heartCount) => {
+    try {
+      // Send a PATCH request to update the rating in db.json
+      const response = await axios.patch(`${API_URL}/destinations/${destinationId}`, {
+        rating: heartCount,
+      });
+  
+      // Update the local state after the API updates the database
+      setDestinations((prevDestinations) =>
+        prevDestinations.map((destination) =>
+          destination.id === destinationId ? { ...destination, rating: response.data.rating } : destination
+        )
+      );
+    } catch (error) {
+      console.error("Error updating rating:", error);
+    }
+  };
+  
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      {/* Page Title */}
-      <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">
-        Top Destinations
+    <div className="min-h-screen bg-gray-100 p-6">
+      <h2 className="text-3xl font-bold text-center text-blue-800 mb-8">
+        Destinations
       </h2>
+      <h4 className="text-m text-center text-blue-300 mb-8">
+        Click on a destination for full details
+      </h4>
 
-      {/* Search Bar */}
-      <input
-        type="text"
-        placeholder="Search destinations..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-      />
+      {/* Loading Message */}
+      {loading && <p className="text-center text-gray-500">Loading destinations...</p>}
 
-      {/* Destination List */}
-      {filteredPlaces.length === 0 ? (
-        <p className="text-gray-600 text-center">No destinations found</p>
-      ) : (
-        <ul className="space-y-4">
-          {filteredPlaces.map((place) => (
-            <li
-              key={place.id}
-              className="p-4 border rounded-lg shadow-md hover:bg-blue-50 transition"
+      {/* Error Message */}
+      {error && <p className="text-center text-red-500">{error}</p>}
+
+      {/* Grid Layout for Destination Cards */}
+      {!loading && !error && (
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
+          {destinations.map((destination) => (
+            <div
+              key={destination.id}
+              className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105"
             >
-              <Link
-                to={`/destinations/${place.id}`}
-                className="text-xl font-semibold text-blue-600 hover:underline"
-              >
-                {place.name}
+              <Link to={`/destinations/${destination.id}`} className="block">
+                <img
+                  src={destination.image}
+                  alt={destination.name}
+                  className="w-full h-48 object-cover"
+                />
               </Link>
-              <p className="text-gray-600">{place.description}</p>
-            </li>
+              <div className="p-4 flex justify-between items-center">
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {destination.name}
+                </h3>
+                {/* 3-Heart Rating System */}
+                <div className="flex">
+                {[1, 2, 3].map((heartCount) => (
+                   <button
+                   key={heartCount}
+                  onClick={() => setHeartRating(destination.id, heartCount)}
+                  className={`text-2xl mx-1 transition-colors ${
+                  destination.rating >= heartCount ? "text-red-500" : "text-gray-300"
+                  }`}
+                  >
+                    ♥
+               </button>
+              ))}
+            </div>
+
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
+      )}
+
+      {/* No Destinations Found Message */}
+      {!loading && !error && destinations.length === 0 && (
+        <p className="text-center text-gray-500">No destinations found.</p>
       )}
     </div>
   );
-};
+}
 
 export default Destinations;
 

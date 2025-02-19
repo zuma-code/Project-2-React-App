@@ -13,7 +13,9 @@ import DeleteDestination from "./pages/AdminPage/DeleteDestinationPage.jsx";
 import AddDestinationPage from "./pages/AdminPage/AddDestinationPage.jsx";
 import GreatDealsPage from "./pages/GreatDealsPage.jsx";
 import PlanTripPage from "./pages/PlanTripPage.jsx";
+
 function App() {
+  
   return (
     <Router>
       <div className="flex flex-col min-h-screen">

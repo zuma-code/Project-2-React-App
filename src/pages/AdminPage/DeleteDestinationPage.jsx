@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
+import { BACK_API } from "../../API";
 
-const API_URL = "http://localhost:5005"; // API base URL
 
 const DeleteDestinationPage = () => {
   const [destinations, setDestinations] = useState([]);
@@ -14,7 +14,7 @@ const DeleteDestinationPage = () => {
     const fetchDestinations = async () => {
       setLoading(true); // Start loading
       try {
-        const res = await fetch(`${API_URL}/destinations`);
+        const res = await fetch(`${BACK_API}/destinations`);
         if (!res.ok) throw new Error("Failed to fetch destinations");
         const data = await res.json();
         setDestinations(data);

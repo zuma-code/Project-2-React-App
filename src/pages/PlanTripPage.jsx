@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { BACK_API } from "../API";
+
 
 
 const PlanTripPage = () => {
-
-  
+  const navigate = useNavigate();
+  const [destinations, setDestinations] = useState([]);
   const [tripDetails, setTripDetails] = useState({
     destination: "",
     startDate: "",
@@ -11,8 +14,22 @@ const PlanTripPage = () => {
     budget: "",
     travelers: 1,
   });
-
   const [submitted, setSubmitted] = useState(false);
+
+  // Fetch destinations from database
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const response = await fetch(BACK_API);
+        const data = await response.json();
+        setDestinations(data);
+      } catch (error) {
+        console.error("Error fetching destinations:", error);
+      }
+    };
+
+    fetchDestinations();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,6 +44,14 @@ const PlanTripPage = () => {
     setSubmitted(true);
   };
 
+  const getBudgetValue = () => {
+    if (!tripDetails.budget) return 0;
+    const budgetString = tripDetails.budget.match(/\$(\d+,?\d*)/);
+    return budgetString ? parseInt(budgetString[1].replace(",", ""), 10) : 0;
+  };
+
+  const totalBudget = getBudgetValue() * tripDetails.travelers;
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
@@ -36,7 +61,9 @@ const PlanTripPage = () => {
 
         {submitted ? (
           <div className="text-center">
-            <h3 className="text-xl font-semibold text-green-600">Trip Planned Successfully! ✅</h3>
+            <h3 className="text-xl font-semibold text-green-600">
+              Trip Planned Successfully! ✅
+            </h3>
             <p className="mt-2 text-gray-700">
               Destination: <strong>{tripDetails.destination}</strong>
             </p>
@@ -44,23 +71,36 @@ const PlanTripPage = () => {
               Travelers: <strong>{tripDetails.travelers}</strong>
             </p>
             <p className="text-gray-700">
-              Budget: <strong>{tripDetails.budget}</strong>
+              Budget per person: <strong>{tripDetails.budget}</strong>
+            </p>
+            <p className="text-gray-700">
+              <strong>Total Budget:</strong> ${totalBudget.toLocaleString()}
             </p>
             <p className="text-gray-700">
               Dates: <strong>{tripDetails.startDate} - {tripDetails.endDate}</strong>
             </p>
+
             <button
               onClick={() => setSubmitted(false)}
               className="mt-6 px-6 py-3 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition"
             >
               Plan Another Trip
             </button>
+
+            <button
+              onClick={() => navigate("/")}
+              className="mt-4 inline-flex justify-center px-6 py-3 bg-gray-500 hover:bg-gray-700 text-white font-semibold rounded-lg shadow-md transition"
+            >
+              Go Back to Homepage
+            </button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Destination Dropdown */}
             <div>
-              <label className="block font-medium text-gray-700">Choose Destination</label>
+              <label className="block font-medium text-gray-700">
+                Choose Destination
+              </label>
               <select
                 name="destination"
                 value={tripDetails.destination}
@@ -69,10 +109,11 @@ const PlanTripPage = () => {
                 required
               >
                 <option value="">Select a destination</option>
-                <option value="Paris, France">Paris, France</option>
-                <option value="Bali, Indonesia">Bali, Indonesia</option>
-                <option value="New York, USA">New York, USA</option>
-                <option value="Tokyo, Japan">Tokyo, Japan</option>
+                {destinations.map((dest) => (
+                  <option key={dest.id} value={dest.name}>
+                    {dest.name}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -85,6 +126,7 @@ const PlanTripPage = () => {
                 value={tripDetails.startDate}
                 onChange={handleChange}
                 className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                min={new Date().toISOString().split("T")[0]}
                 required
               />
             </div>
@@ -98,13 +140,16 @@ const PlanTripPage = () => {
                 value={tripDetails.endDate}
                 onChange={handleChange}
                 className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                min={tripDetails.startDate}
                 required
               />
             </div>
 
             {/* Number of Travelers */}
             <div>
-              <label className="block font-medium text-gray-700">Number of Travelers</label>
+              <label className="block font-medium text-gray-700">
+                Number of Travelers
+              </label>
               <input
                 type="number"
                 name="travelers"
@@ -127,9 +172,9 @@ const PlanTripPage = () => {
                 required
               >
                 <option value="">Select budget range</option>
-                <option value="Budget ($500-$1,000)">Budget ($500-$1,000)</option>
-                <option value="Standard ($1,000-$3,000)">Standard ($1,000-$3,000)</option>
-                <option value="Luxury ($3,000+)">Luxury ($3,000+)</option>
+                <option value="Budget ($500)">Budget ($500)</option>
+                <option value="Standard ($1,000)">Standard ($1,000)</option>
+                <option value="Luxury ($3,000)">Luxury ($3,000)</option>
               </select>
             </div>
 
@@ -148,3 +193,6 @@ const PlanTripPage = () => {
 };
 
 export default PlanTripPage;
+
+
+

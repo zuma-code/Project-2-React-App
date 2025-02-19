@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { BACK_API } from "../API";
 
-const API_URL = "http://localhost:5005";
 
 function DestinationDetails() {
   const { id } = useParams(); // Get the destination ID from the URL
@@ -12,7 +12,7 @@ function DestinationDetails() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/destinations/${id}`)
+      .get(`${BACK_API}/destinations/${id}`)
       .then((response) => {
         setDestination(response.data);
         setLoading(false);

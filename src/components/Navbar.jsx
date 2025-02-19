@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-400 text-white p-4 flex justify-between items-center relative ml-[-30px]">
+    <nav className="bg-blue-400 text-white p-8 flex justify-between items-center relative ml-[-30px]">
       {/* Logo / Brand */}
       <div className="ml-12">
         <img src={logoNavbar} alt="Travel Explorer Logo" className="h-20 w-20" />

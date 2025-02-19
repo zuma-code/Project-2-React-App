@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BACK_API } from "../API";
 
-const API_URL = "http://localhost:5005";
 
 function Destinations() {
   const [destinations, setDestinations] = useState([]);
@@ -13,7 +13,7 @@ function Destinations() {
   // Fetch destinations from API
   useEffect(() => {
     axios
-      .get(`${API_URL}/destinations`)
+      .get(`${BACK_API}/destinations`)
       .then((response) => {
         setDestinations(response.data);
         setLoading(false);

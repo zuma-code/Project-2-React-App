@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
+import { BACK_API } from "../API";
 
-const API_URL = "http://localhost:5005/destinations"; // API endpoint
 
 const GreatDealsPage = () => {
   const [deals, setDeals] = useState([]);
 
   useEffect(() => {
-    fetch(API_URL)
+    fetch(BACK_API)
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 2) {

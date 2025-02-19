@@ -83,12 +83,23 @@ const Home = () => {
 
       {/* Newsletter Signup */}
       <section className="bg-blue-500 py-12 px-6 text-center text-white">
-        <h2 className="text-2xl font-bold mb-4">📩 Subscribe for Exclusive Deals</h2>
-        <div className="flex max-w-lg mx-auto bg-white rounded-full overflow-hidden shadow-md">
-          <input type="email" placeholder="Enter your email" className="w-full px-4 py-3 text-gray-700 focus:outline-none" />
-          <button className="bg-yellow-500 px-6 py-3 font-semibold hover:bg-yellow-600">Subscribe</button>
-        </div>
-      </section>
+  <h2 className="text-2xl font-bold mb-4">📩 Subscribe for Exclusive Deals</h2>
+
+  <div className="flex flex-col sm:flex-row max-w-lg mx-auto bg-white rounded-full overflow-hidden shadow-md">
+    {/* Input Field */}
+    <input 
+      type="email" 
+      placeholder="Enter your email" 
+      className="w-full px-4 py-3 text-gray-700 focus:outline-none flex-1"
+    />
+    
+    {/* Subscribe Button */}
+    <button className="bg-yellow-500 px-6 py-3 font-semibold hover:bg-yellow-600 w-full sm:w-auto">
+      Subscribe
+    </button>
+  </div>
+</section>
+
 
   
     </div>

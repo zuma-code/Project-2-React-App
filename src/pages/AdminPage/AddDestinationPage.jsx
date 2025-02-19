@@ -1,8 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { BACK_API } from "../../API";
 
-const API_URL = "http://localhost:5005/destinations";
 
 // Function to validate if the URL is valid
 const isValidUrl = (url) => /^(ftp|http|https):\/\/[^ "]+$/.test(url);
@@ -62,7 +62,7 @@ const AddDestinationPage = ({ onDestinationAdded }) => {
     }
 
     try {
-      const response = await axios.post(API_URL, newDestination);
+      const response = await axios.post(BACK_API, newDestination);
       setSuccess("Destination added successfully! ✅");
       setDestination({
         name: "",

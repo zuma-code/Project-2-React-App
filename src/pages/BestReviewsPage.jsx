@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { BACK_API } from "../API";
 
-const API_URL = "http://localhost:5005";
+
 
 function BestReviews() {
   const [bestDestinations, setBestDestinations] = useState([]);
@@ -11,7 +12,7 @@ function BestReviews() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/destinations`)
+      .get(`${BACK_API}/destinations`)
       .then((response) => {
         if (!Array.isArray(response.data)) {
           throw new Error("Invalid API response format");

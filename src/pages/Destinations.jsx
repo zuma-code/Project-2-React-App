@@ -35,7 +35,7 @@ function Destinations() {
   const setHeartRating = async (destinationId, heartCount) => {
     try {
       // Send a PATCH request to update the rating in db.json
-      const response = await axios.patch(`${API_URL}/destinations/${destinationId}`, {
+      const response = await axios.patch(`${BACK_API}/destinations/${destinationId}`, {
         rating: heartCount,
       });
   

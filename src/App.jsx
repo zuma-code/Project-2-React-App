@@ -1,5 +1,6 @@
 
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/HomePage.jsx';
@@ -14,27 +15,10 @@ import AddDestinationPage from "./pages/AdminPage/AddDestinationPage.jsx";
 import GreatDealsPage from "./pages/GreatDealsPage.jsx";
 import PlanTripPage from "./pages/PlanTripPage.jsx";
 
-import { Cloudinary } from '@cloudinary/url-gen';
-import { auto } from '@cloudinary/url-gen/actions/resize';
-import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
-import { AdvancedImage } from '@cloudinary/react';
-
-
 function App() {
-  const cld = new Cloudinary({ cloud: { cloudName: 'dz2yxijz8' } });
   
-  // Use this sample image or upload your own via the Media Explorer
-  const img = cld
-        .image('cld-sample-5')
-        .format('auto') // Optimize delivery by resizing and applying auto-format and auto-quality
-        .quality('auto')
-        .resize(auto().gravity(autoGravity()).width(500).height(500)); // Transform the image: auto-crop to square aspect_ratio
-
-
   return (
-   
     <Router>
-       (<AdvancedImage cldImg={img}/>);
       <div className="flex flex-col min-h-screen">
         {/* Navbar at the top */}
         <Navbar />

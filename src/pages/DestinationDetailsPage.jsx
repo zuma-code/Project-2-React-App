@@ -75,7 +75,7 @@ function DestinationDetails() {
             {destination.reviews.map((review, index) => (
               <div key={index} className="bg-gray-100 p-3 rounded-md mt-2">
                 <p className="text-gray-800 font-medium">{review.user} ⭐ {review.rating}/5</p>
-                <p className="text-gray-600 italic">"{review.comment}"</p>
+                <p className="text-gray-600 italic">{review.comment}</p>
               </div>
             ))}
           </div>

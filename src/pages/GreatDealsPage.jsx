@@ -6,7 +6,7 @@ const GreatDealsPage = () => {
   const [deals, setDeals] = useState([]);
 
   useEffect(() => {
-    fetch(BACK_API)
+    fetch(`${BACK_API}/destinations`)
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 2) {

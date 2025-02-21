@@ -62,7 +62,7 @@ const AddDestinationPage = ({ onDestinationAdded }) => {
     }
 
     try {
-      const response = await axios.post(BACK_API, newDestination);
+      const response = await axios.post(`${BACK_API}/destinations`, newDestination);
       setSuccess("Destination added successfully! ✅");
       setDestination({
         name: "",

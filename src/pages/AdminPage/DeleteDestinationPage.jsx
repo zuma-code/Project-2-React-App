@@ -32,7 +32,7 @@ const DeleteDestinationPage = () => {
   const handleDelete = async () => {
     if (!deleteId) return;
     try {
-      const res = await fetch(`${API_URL}/destinations/${deleteId}`, { method: "DELETE" });
+      const res = await fetch(`${BACK_API}/destinations/${deleteId}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Failed to delete destination");
 
       setDestinations((prev) => prev.filter((dest) => dest.id !== deleteId)); // Remove from UI
